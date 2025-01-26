@@ -6,3 +6,6 @@
 result
 result-*
 outputs
+
+/.hydra-data
+/build

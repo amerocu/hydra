@@ -79,10 +79,9 @@ $ nix-build
 
 You can use the provided shell.nix to get a working development environment:
 ```
-$ nix-shell
-$ autoreconfPhase
-$ configurePhase # NOTE: not ./configure
-$ make
+$ nix develop
+$ meson build # initialize build directory
+$ meson compile -C build # builds cpp code
 ```
 
 ### Executing Hydra During Development
@@ -91,16 +90,17 @@ When working on new features or bug fixes you need to be able to run Hydra from 
 can be done using [foreman](https://github.com/ddollar/foreman):
 
 ```
-$ nix-shell
-$ # hack hack
-$ make
+$ nix develop
+$ meson build # initialize build directory
+$ meson compile -C build # builds cpp code
 $ foreman start
+$ # hack on your perl
 ```
 
 Have a look at the [Procfile](./Procfile) if you want to see how the processes are being started. In order to avoid
 conflicts with services that might be running on your host, hydra and postgress are started on custom ports:
 
-- hydra-server: 63333 with the username "alice" and the password "foobar"
+- hydra-server: 63333 with the username "admin" and the password "admin"
 - postgresql: 64444
 
 Note that this is only ever meant as an ad-hoc way of executing Hydra during development. Please make use of the
